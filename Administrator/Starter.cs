@@ -18,6 +18,7 @@ class Starter
         // Debug.Log("After first Scene loaded");
         Map.Instance.Create();
         Map.Instance.InitializeTowers();
+        EnemyManager.Instance.Create();
     }
 
     [RuntimeInitializeOnLoadMethod]
