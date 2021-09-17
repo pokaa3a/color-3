@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Starter : MonoBehaviour
+// The first script when the scene is loaded
+class Starter
 {
-    // Start is called before the first frame update
-    void Start()
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void OnBeforeSceneLoadRuntimeMethod()
     {
-        
+        // Debug.Log("Before first Scene loaded");
+
     }
 
-    // Update is called once per frame
-    void Update()
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    static void OnAfterSceneLoadRuntimeMethod()
     {
-        
+        // Debug.Log("After first Scene loaded");
+        Map.Instance.Create();
+        Map.Instance.InitializeTowers();
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    static void OnRuntimeMethodLoad()
+    {
+        // Debug.Log("RuntimeMethodLoad: After first Scene loaded");
+
     }
 }
