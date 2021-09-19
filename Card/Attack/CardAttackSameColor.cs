@@ -12,7 +12,7 @@ public class CardAttackSameColor : Card
         spritePath = SpritePath.Card.Small.attackSameColor;
         bigSpritePath = SpritePath.Card.Big.attackSameColor;
 
-        // skill
-        this.skill = new SkillAttackSameColor();
+        // action
+        this.action = new ActionAttackSameColor();
     }
 }

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillAttackConnected : Skill
+public class ActionAttackConnected : Action
 {
     private const int attackAmount = 1;
 
-    public SkillAttackConnected() : base() { }
+    public ActionAttackConnected() : base() { }
 
     public override bool Act(Vector2 xy)
     {

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillAttackSameColor : Skill
+public class ActionAttackSameColor : Action
 {
     private const int attackAmount = 1;
 
-    public SkillAttackSameColor() : base() { }
+    public ActionAttackSameColor() : base() { }
 
     public override bool Act(Vector2 xy)
     {

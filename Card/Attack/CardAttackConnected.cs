@@ -12,7 +12,7 @@ public class CardAttackConnected : Card
         spritePath = SpritePath.Card.Small.attackConnected;
         bigSpritePath = SpritePath.Card.Big.attackConnected;
 
-        // skill
-        this.skill = new SkillAttackConnected();
+        // action
+        this.action = new ActionAttackConnected();
     }
 }

@@ -12,7 +12,7 @@ public class CardAttack : Card
         spritePath = SpritePath.Card.Small.attack;
         bigSpritePath = SpritePath.Card.Big.attack;
 
-        // skill
-        this.skill = new SkillAttack();
+        // action
+        this.action = new ActionAttack();
     }
 }
