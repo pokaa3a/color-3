@@ -16,9 +16,9 @@ public class SpritePath
     {
         public class Character
         {
-            public const string square = "Sprites/object/character/square";
-            public const string circle = "Sprites/object/character/triangle";
-            public const string triangle = "Sprites/object/character/triangle";
+            public const string square = "Sprites/object/character/character_square";
+            public const string circle = "Sprites/object/character/character_circle";
+            public const string triangle = "Sprites/object/character/character_triangle";
         }
         public class Enemy
         {

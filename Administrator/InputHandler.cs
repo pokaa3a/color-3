@@ -34,8 +34,8 @@ public class InputHandler : MonoBehaviour
             if (InputHandler.newTouch)
             {
                 Vector2 xy = Camera.main.ScreenToWorldPoint(InputHandler.touchPos);
-                // ActionManager.Instance.Act(xy);
-                CardManager.Instance.Act(xy);
+                // CardManager.Instance.Act(xy);
+                SkillManager.Instance.Act(xy);
             }
         }
     }

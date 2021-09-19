@@ -5,8 +5,8 @@ using UnityEngine;
 
 public enum TowerStatus
 {
-    YetCreaped,
-    DoneCreaped
+    YetReaped,
+    DoneReaped
 };
 
 public class Tower : MapObject
@@ -21,26 +21,26 @@ public class Tower : MapObject
 
         void OnMouseDown()
         {
-            if (tower.status == TowerStatus.YetCreaped)
+            if (tower.status == TowerStatus.YetReaped)
             {
                 tower.Reap();
-                tower.status = TowerStatus.DoneCreaped;
+                tower.status = TowerStatus.DoneReaped;
             }
         }
     }
 
-    private TowerStatus _status = TowerStatus.YetCreaped;
+    private TowerStatus _status = TowerStatus.YetReaped;
     public TowerStatus status
     {
         get => _status;
         set
         {
             _status = value;
-            if (_status == TowerStatus.YetCreaped)
+            if (_status == TowerStatus.YetReaped)
             {
                 spritePath = SpritePath.Object.towerClickable;
             }
-            else if (_status == TowerStatus.DoneCreaped)
+            else if (_status == TowerStatus.DoneReaped)
             {
                 spritePath = SpritePath.Object.tower;
             }
@@ -72,9 +72,7 @@ public class Tower : MapObject
         spriteWH = new Vector2(
             Map.Instance.tileWH.x * 0.5f,
             Map.Instance.tileWH.y * 0.6f);
-        this.status = TowerStatus.YetCreaped;
-
-        this.rc = rc;
+        this.status = TowerStatus.YetReaped;
 
         // add component
         TowerComponent towerComponent = this.gameObject.AddComponent<TowerComponent>() as TowerComponent;
@@ -90,7 +88,7 @@ public class Tower : MapObject
         lifeText.fontSize = 100;
         lifeText.text = $"{life}/{maxLife}";
         lifeText.anchor = TextAnchor.MiddleCenter;
-        lifeText.color = new Color32(0, 255, 50, 255);   // red
+        lifeText.color = new Color32(0, 255, 255, 255);   // green-blue
     }
 
     public void BeAttacked(int attackAmount)

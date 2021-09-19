@@ -26,11 +26,13 @@ public class EnemyManager
         enemies = new List<Enemy>();
     }
 
-    public void Create()
+    public void Summon()
     {
-        Vector2Int rc = new Vector2Int(3, 5);
-        Enemy minion = Map.Instance.AddObject<Enemy>(rc);
-        enemies.Add(minion);
+        Enemy minion1 = Map.Instance.AddObject<Enemy>(new Vector2Int(0, 7));
+        enemies.Add(minion1);
+
+        Enemy minion2 = Map.Instance.AddObject<Enemy>(new Vector2Int(7, 0));
+        enemies.Add(minion2);
     }
 
     public void StartTurn()

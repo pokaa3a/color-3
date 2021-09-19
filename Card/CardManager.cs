@@ -85,17 +85,17 @@ public class CardManager
         bigCardHolder.enabled = false;
     }
 
-    public void Act(Vector2 xy)
-    {
-        if (selectedCard == null)
-        {
-            return;
-        }
+    // public void Act(Vector2 xy)
+    // {
+    //     if (selectedCard == null)
+    //     {
+    //         return;
+    //     }
 
-        if (selectedCard.Act(xy))
-        {
-            // actions of this card have finished
-            selectedCard = null;
-        }
-    }
+    //     if (selectedCard.Act(xy))
+    //     {
+    //         // actions of this card have finished
+    //         selectedCard = null;
+    //     }
+    // }
 }

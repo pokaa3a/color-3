@@ -59,8 +59,8 @@ public class CardHolder
             transform.position = initPosition;
             isDragging = false;
 
-            // ActionManager.Instance.SelectAction(card.action);
-            CardManager.Instance.selectedCard = card;
+            // CardManager.Instance.selectedCard = card;
+            SkillManager.Instance.selectedSkill = card.skill;
 
             // Disable card holder
             Image img = gameObject.GetComponent<Image>() as Image;

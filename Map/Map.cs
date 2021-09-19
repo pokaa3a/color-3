@@ -80,7 +80,7 @@ public class Map
         xyE = new Vector2(xE, yC);
     }
 
-    public void Create()
+    public void InitializeMap()
     {
         for (int r = 0; r < rows; ++r)
         {
@@ -89,6 +89,8 @@ public class Map
                 tiles.Add(new Tile(new Vector2Int(r, c), tileWH));
             }
         }
+        InitializeTowers();
+        RefillTiles();
     }
 
     public Tile GetTile(Vector2Int rc)
@@ -205,7 +207,7 @@ public class Map
                 Tower tower = GetTile(new Vector2Int(r, c)).GetObject<Tower>();
                 if (tower != null)
                 {
-                    tower.status = TowerStatus.YetCreaped;
+                    tower.status = TowerStatus.YetReaped;
                 }
             }
         }

@@ -18,14 +18,16 @@ class Starter
     {
         // Debug.Log("After first Scene loaded");
         GameStats.Instance.score = 0;
-        Map.Instance.Create();
-        Map.Instance.InitializeTowers();
-        Map.Instance.RefillTiles();
-        EnemyManager.Instance.Create();
+        Map.Instance.InitializeMap();
+        EnemyManager.Instance.Summon();
 
         if (SceneManager.GetActiveScene().name == SceneHandler.sceneCard)
         {
             CardManager.Instance.RefreshHandCards();
+        }
+        else if (SceneManager.GetActiveScene().name == SceneHandler.sceneCharacter)
+        {
+            CharacterManager.Instance.Summon();
         }
     }
 
