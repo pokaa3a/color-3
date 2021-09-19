@@ -195,4 +195,82 @@ public class Map
     {
         mapObjects.Remove(tower);
     }
+
+    public void ResetTowers()
+    {
+        for (int r = 0; r < rows; ++r)
+        {
+            for (int c = 0; c < rows; ++c)
+            {
+                Tower tower = GetTile(new Vector2Int(r, c)).GetObject<Tower>();
+                if (tower != null)
+                {
+                    tower.status = TowerStatus.YetCreaped;
+                }
+            }
+        }
+    }
+
+    public void RefillTiles()
+    {
+        for (int r = 0; r < rows; ++r)
+        {
+            for (int c = 0; c < rows; ++c)
+            {
+                Vector2Int rc = new Vector2Int(r, c);
+                if (GetTile(rc).color == Color.Empty)
+                {
+                    int nextColor = UnityEngine.Random.Range(0, 3);
+                    if (nextColor == 0)
+                    {
+                        // GetTile(rc).SetColor(Color.Red);
+                        GetTile(rc).CallStartCoroutine(GetTile(rc).SetColorCoroutine(Color.Red));
+                    }
+                    else if (nextColor == 1)
+                    {
+                        // GetTile(rc).SetColor(Color.Yellow);
+                        GetTile(rc).CallStartCoroutine(GetTile(rc).SetColorCoroutine(Color.Yellow));
+                    }
+                    else
+                    {
+                        // GetTile(rc).SetColor(Color.Blue);
+                        GetTile(rc).CallStartCoroutine(GetTile(rc).SetColorCoroutine(Color.Blue));
+                    }
+                }
+            }
+        }
+    }
+
+    // look for all connected tiles which have the same color as the input tile
+    public HashSet<Vector2Int> GetConnectedTiles(Vector2Int rc)
+    {
+        // BFS
+        Color selectedColor = GetTile(rc).color;
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+        HashSet<Vector2Int> output = new HashSet<Vector2Int>();
+        queue.Enqueue(rc);
+        output.Add(rc);
+        while (queue.Count > 0)
+        {
+            int qCount = queue.Count;
+            for (int i = 0; i < qCount; ++i)
+            {
+                Vector2Int curRc = queue.Dequeue();
+                Vector2Int[] directions = {
+                        Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left };
+                foreach (Vector2Int d in directions)
+                {
+                    Vector2Int nextRc = curRc + d;
+                    if (InsideMap(nextRc) &&
+                        GetTile(nextRc).color == selectedColor &&
+                        !output.Contains(nextRc))
+                    {
+                        queue.Enqueue(nextRc);
+                        output.Add(nextRc);
+                    }
+                }
+            }
+        }
+        return output;
+    }
 }

@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Assertions;
 
 // Record all the statics in the game
-public class GameStats : MonoBehaviour
+public class GameStats
 {
-
     private int _score;
     public int score
     {
         get => _score;
-        protected set
+        set
         {
             _score = value;
             scoreText.text = $"{_score} / {winningScore}";
@@ -38,20 +38,21 @@ public class GameStats : MonoBehaviour
     private GameStats()
     {
         scoreText = GameObject.Find(ObjectPath.score).GetComponent<Text>() as Text;
+        Assert.IsNotNull(scoreText);
         score = 0;
     }
 
-    public void ComputeScore()
-    {
-        foreach (MapObject obj in Map.Instance.mapObjects)
-        {
-            if (obj is Tower)
-            {
-                if (Map.Instance.GetTile(obj.rc).color != Color.Empty)
-                {
-                    score += 1;
-                }
-            }
-        }
-    }
+    // public void ComputeScore()
+    // {
+    //     foreach (MapObject obj in Map.Instance.mapObjects)
+    //     {
+    //         if (obj is Tower)
+    //         {
+    //             if (Map.Instance.GetTile(obj.rc).color != Color.Empty)
+    //             {
+    //                 score += 1;
+    //             }
+    //         }
+    //     }
+    // }
 }

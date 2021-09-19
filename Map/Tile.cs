@@ -138,4 +138,10 @@ public class Tile
     {
         component.CallStartCoroutine(iEnum);
     }
+
+    public IEnumerator SetColorCoroutine(Color color)
+    {
+        yield return new WaitForSeconds(0.5f);
+        SetColor(color);
+    }
 }

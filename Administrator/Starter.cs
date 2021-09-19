@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // The first script when the scene is loaded
 class Starter
@@ -16,9 +17,16 @@ class Starter
     static void OnAfterSceneLoadRuntimeMethod()
     {
         // Debug.Log("After first Scene loaded");
+        GameStats.Instance.score = 0;
         Map.Instance.Create();
         Map.Instance.InitializeTowers();
+        Map.Instance.RefillTiles();
         EnemyManager.Instance.Create();
+
+        if (SceneManager.GetActiveScene().name == SceneHandler.sceneCard)
+        {
+            CardManager.Instance.RefreshHandCards();
+        }
     }
 
     [RuntimeInitializeOnLoadMethod]

@@ -31,6 +31,7 @@ public class SpritePath
             public const string move = "Sprites/object/effect/move";
         }
         public const string tower = "Sprites/object/tower";
+        public const string towerClickable = "Sprites/object/tower_clickable";
     }
 
     public class UI
@@ -40,6 +41,24 @@ public class SpritePath
             public const string endTurnButtonEnemy = "Sprites/ui/button/endTurnButton_enemy";
             public const string endTurnButtonPressed = "Sprites/ui/button/endTurnButton_pressed";
             public const string endTurnButtonUnpressed = "Sprites/ui/button/endTurnButton_unpressed";
+        }
+    }
+
+    public class Card
+    {
+        public class Small
+        {
+            public const string empty = "Sprites/card/small/empty";
+            public const string attack = "Sprites/card/small/attack";
+            public const string attackConnected = "Sprites/card/small/attack_connected";
+            public const string attackSameColor = "Sprites/card/small/attack_same_color";
+        }
+        public class Big
+        {
+            public const string empty = "Sprites/card/big/empty";
+            public const string attack = "Sprites/card/big/attack";
+            public const string attackConnected = "Sprites/card/big/attack_connected";
+            public const string attackSameColor = "Sprites/card/big/attack_same_color";
         }
     }
 }
