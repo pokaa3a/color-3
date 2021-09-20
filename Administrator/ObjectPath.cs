@@ -11,4 +11,8 @@ public class ObjectPath
     // Scene DemoCard only
     public const string card = "Card";
     public const string bigCard = "BigCard";
+
+    // Scene DemoCharacter only
+    public const string skillHolder = "SkillHolder";
+    public const string skillDescription = "SkillDescription";
 }

@@ -64,4 +64,22 @@ public class SpritePath
             public const string attackSameColor = "Sprites/card/big/attack_same_color";
         }
     }
+
+    public class Skill
+    {
+        public class Icon
+        {
+            public const string empty = "Sprites/skill/icon/empty";
+            public const string attack = "Sprites/skill/icon/attack";
+            public const string attackConnected = "Sprites/skill/icon/attack_connected";
+            public const string attackSameColor = "Sprites/skill/icon/attack_same_color";
+        }
+
+        public class Description
+        {
+            public const string attack = "Sprites/skill/description/attack";
+            public const string attackConnected = "Sprites/skill/description/attack_connected";
+            public const string attackSameColor = "Sprites/skill/description/attack_same_color";
+        }
+    }
 }
