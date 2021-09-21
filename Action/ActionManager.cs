@@ -4,7 +4,25 @@ using UnityEngine;
 
 public class ActionManager
 {
-    public Action selectedAction = null;
+    private Action _selectedAction = null;
+    public Action selectedAction
+    {
+        get => _selectedAction;
+        set
+        {
+            if (_selectedAction != null)
+            {
+                _selectedAction.Deinitialize();
+            }
+
+            _selectedAction = value;
+
+            if (_selectedAction != null)
+            {
+                _selectedAction.Initialize();
+            }
+        }
+    }
 
     // Singleton
     private static ActionManager _instance;

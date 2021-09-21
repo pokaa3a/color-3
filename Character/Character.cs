@@ -9,7 +9,7 @@ public class Character : MapObject
     private const int maxLife = 5;
     private int _life = maxLife;
     private const int moveRange = 3;
-    private HashSet<Vector2Int> reachableTiles = new HashSet<Vector2Int>();
+    private HashSet<Vector2Int> movableRCs = new HashSet<Vector2Int>();
 
     public int life
     {
@@ -127,7 +127,7 @@ public class Character : MapObject
                 {
                     Effect e1 = Map.Instance.AddObject<Effect>(rc + new Vector2Int(r, c));
                     e1.spritePath = SpritePath.Object.Effect.reachable;
-                    reachableTiles.Add(rc + new Vector2Int(r, c));
+                    movableRCs.Add(rc + new Vector2Int(r, c));
                 }
                 if (c == 0) continue;
 
@@ -139,7 +139,7 @@ public class Character : MapObject
                 {
                     Effect e2 = Map.Instance.AddObject<Effect>(rc + new Vector2Int(r, c));
                     e2.spritePath = SpritePath.Object.Effect.reachable;
-                    reachableTiles.Add(rc + new Vector2Int(r, c));
+                    movableRCs.Add(rc + new Vector2Int(r, c));
                 }
             }
         }
@@ -147,10 +147,10 @@ public class Character : MapObject
 
     public void CleanRechableRange()
     {
-        foreach (Vector2Int rcTile in reachableTiles)
+        foreach (Vector2Int tileRc in movableRCs)
         {
-            Map.Instance.GetTile(rcTile).DestroyObject<Effect>();
+            Map.Instance.GetTile(tileRc).DestroyObject<Effect>();
         }
-        reachableTiles.Clear();
+        movableRCs.Clear();
     }
 }
