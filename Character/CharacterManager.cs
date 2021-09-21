@@ -13,10 +13,13 @@ public class CharacterManager
         set
         {
             _selectedCharacter = value;
-
             foreach (Character character in characters)
             {
-                if (character != _selectedCharacter)
+                if (character == _selectedCharacter)
+                {
+                    character.selected = true;
+                }
+                else
                 {
                     character.selected = false;
                 }

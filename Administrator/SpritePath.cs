@@ -32,6 +32,7 @@ public class SpritePath
             public const string attack = "Sprites/object/effect/attack";
             public const string attackAttempt = "Sprites/object/effect/attack_attempt";
             public const string move = "Sprites/object/effect/move";
+            public const string reachable = "Sprites/object/effect/reachable";
         }
         public const string tower = "Sprites/object/tower";
         public const string towerClickable = "Sprites/object/tower_clickable";

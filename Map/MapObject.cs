@@ -17,8 +17,8 @@ public class MapObject
         }
     }
 
-    private Vector2Int _rc = Vector2Int.zero;
-    public Vector2Int rc
+    protected Vector2Int _rc = Vector2Int.zero;
+    public virtual Vector2Int rc
     {
         get => _rc;
         set

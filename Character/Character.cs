@@ -8,6 +8,9 @@ public class Character : MapObject
     private TextMesh lifeText;
     private const int maxLife = 5;
     private int _life = maxLife;
+    private const int moveRange = 3;
+    private HashSet<Vector2Int> reachableTiles = new HashSet<Vector2Int>();
+
     public int life
     {
         get => _life;
@@ -28,8 +31,7 @@ public class Character : MapObject
 
         void OnMouseDown()
         {
-            character.selected = !character.selected;
-            if (character.selected)
+            if (!character.selected)
             {
                 CharacterManager.Instance.selectedCharacter = character;
             }
@@ -43,6 +45,20 @@ public class Character : MapObject
     public string originalSprite;
     public string selectedSprite;
 
+    private bool _hasMoved = false;
+    public bool hasMoved
+    {
+        get => _hasMoved;
+        set
+        {
+            _hasMoved = value;
+            if (_hasMoved)
+            {
+                CleanRechableRange();
+            }
+        }
+    }
+
     private bool _selected = false;
     public bool selected
     {
@@ -53,10 +69,16 @@ public class Character : MapObject
             if (_selected)
             {
                 this.spritePath = selectedSprite;
+                if (!hasMoved)
+                {
+                    ShowReachableRange();
+                    ActionManager.Instance.selectedAction = new ActionMove(this);
+                }
             }
             else
             {
                 this.spritePath = originalSprite;
+                CleanRechableRange();
             }
         }
     }
@@ -89,5 +111,46 @@ public class Character : MapObject
         lifeText.text = $"{life}/{maxLife}";
         lifeText.anchor = TextAnchor.MiddleCenter;
         lifeText.color = new Color32(0, 255, 0, 255);
+    }
+
+    public void ShowReachableRange()
+    {
+        for (int dist = 0; dist <= moveRange; ++dist)
+        {
+            for (int r = -dist; r <= dist; ++r)
+            {
+                int c = dist - Mathf.Abs(r);
+                if (Map.Instance.InsideMap(rc + new Vector2Int(r, c)) &&
+                    Map.Instance.GetTile(rc + new Vector2Int(r, c)).GetObject<Character>() == null &&
+                    Map.Instance.GetTile(rc + new Vector2Int(r, c)).GetObject<Tower>() == null &&
+                    Map.Instance.GetTile(rc + new Vector2Int(r, c)).GetObject<Enemy>() == null)
+                {
+                    Effect e1 = Map.Instance.AddObject<Effect>(rc + new Vector2Int(r, c));
+                    e1.spritePath = SpritePath.Object.Effect.reachable;
+                    reachableTiles.Add(rc + new Vector2Int(r, c));
+                }
+                if (c == 0) continue;
+
+                c *= -1;
+                if (Map.Instance.InsideMap(rc + new Vector2Int(r, c)) &&
+                    Map.Instance.GetTile(rc + new Vector2Int(r, c)).GetObject<Character>() == null &&
+                    Map.Instance.GetTile(rc + new Vector2Int(r, c)).GetObject<Tower>() == null &&
+                    Map.Instance.GetTile(rc + new Vector2Int(r, c)).GetObject<Enemy>() == null)
+                {
+                    Effect e2 = Map.Instance.AddObject<Effect>(rc + new Vector2Int(r, c));
+                    e2.spritePath = SpritePath.Object.Effect.reachable;
+                    reachableTiles.Add(rc + new Vector2Int(r, c));
+                }
+            }
+        }
+    }
+
+    public void CleanRechableRange()
+    {
+        foreach (Vector2Int rcTile in reachableTiles)
+        {
+            Map.Instance.GetTile(rcTile).DestroyObject<Effect>();
+        }
+        reachableTiles.Clear();
     }
 }
