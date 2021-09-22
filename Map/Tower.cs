@@ -51,7 +51,7 @@ public class Tower : MapObject
 
     // TODO: should this be integrated to MapObject?
     private TextMesh lifeText;
-    private const int maxLife = 5;
+    private const int maxLife = 100;
     private int _life = maxLife;
     public int life
     {

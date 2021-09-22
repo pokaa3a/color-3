@@ -6,7 +6,7 @@ using UnityEngine;
 public class Character : MapObject
 {
     private TextMesh lifeText;
-    private const int maxLife = 5;
+    private const int maxLife = 100;
     private int _life = maxLife;
     private const int moveRange = 3;
     private HashSet<Vector2Int> movableRCs = new HashSet<Vector2Int>();
@@ -152,5 +152,20 @@ public class Character : MapObject
             Map.Instance.GetTile(tileRc).DestroyObject<Effect>();
         }
         movableRCs.Clear();
+    }
+
+    public void BeAttacked(int attackAmount)
+    {
+        life = Mathf.Max(life - attackAmount, 0);
+        if (life == 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Map.Instance.GetTile(rc).DestroyObject<Character>();
+        CharacterManager.Instance.KillCharacter(this);
     }
 }

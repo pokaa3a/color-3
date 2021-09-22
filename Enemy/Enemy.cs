@@ -18,7 +18,7 @@ public class Enemy : MapObject
     }
     private Vector2Int rcAttack = new Vector2Int(-1, -1);
 
-    private const int maxLife = 5;
+    private const int maxLife = 100;
     private int _life = maxLife;
     private int life
     {

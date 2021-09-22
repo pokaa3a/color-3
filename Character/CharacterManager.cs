@@ -83,4 +83,9 @@ public class CharacterManager
         triangle.skills = new List<Skill>{
             new SkillAttack(), new SkillAttackConnected(), new SkillAttackSameColor()};
     }
+
+    public void KillCharacter(Character character)
+    {
+        characters.Remove(character);
+    }
 }

@@ -13,4 +13,15 @@ public class Action
     public virtual void Deinitialize() { }
 
     public virtual bool Act(Vector2 xy) { return true; }
+
+    public virtual int Consume(Vector2Int rc)
+    {
+        HashSet<Vector2Int> connectedRCs = Map.Instance.GetConnectedTiles(rc);
+        foreach (Vector2Int tileRc in connectedRCs)
+        {
+            Map.Instance.GetTile(tileRc).SetColor(Color.Empty);
+        }
+        Map.Instance.RefillTiles();
+        return connectedRCs.Count;
+    }
 }

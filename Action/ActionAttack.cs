@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ActionAttack : Action
 {
-    private const int attackAmount = 1;
+    private const int attackDivisor = 1;
     private HashSet<Vector2Int> actionAvailableRCs = new HashSet<Vector2Int>();
 
     public ActionAttack() : base() { }
@@ -64,14 +64,27 @@ public class ActionAttack : Action
         if (Map.Instance.InsideMap(xy))
         {
             Vector2Int rc = Map.Instance.XYtoRC(xy);
-            Enemy enemy = Map.Instance.GetTile(rc).GetObject<Enemy>();
+            int power = Consume(CharacterManager.Instance.selectedCharacter.rc);
+            int attackAmount = power / attackDivisor;
+            Map.Instance.GetTile(rc).CallStartCoroutine(AttackCoroutine(rc));
 
+            // TODO: Refactor -> change it to "attack all objects" in this tile
+            Enemy enemy = Map.Instance.GetTile(rc).GetObject<Enemy>();
             if (enemy != null)
             {
                 enemy.BeAttacked(attackAmount);
-                Map.Instance.GetTile(rc).CallStartCoroutine(AttackCoroutine(rc));
-                return true;
             }
+            Tower tower = Map.Instance.GetTile(rc).GetObject<Tower>();
+            if (tower != null)
+            {
+                tower.BeAttacked(attackAmount);
+            }
+            Character character = Map.Instance.GetTile(rc).GetObject<Character>();
+            if (character != null)
+            {
+                character.BeAttacked(attackAmount);
+            }
+            return true;
         }
         return false;
     }
